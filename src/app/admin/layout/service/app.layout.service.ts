@@ -120,9 +120,7 @@ export class LayoutService {
 
   changeTheme() {
     const config = this.config();
-    const themeLink = <HTMLLinkElement>(
-      this.document.getElementById('theme-css')
-    );
+    const themeLink = <HTMLLinkElement>this.document.getElementById('theme-css');
     const themeLinkHref = themeLink.getAttribute('href')!;
     const newHref = themeLinkHref
       .split('/')
@@ -151,8 +149,8 @@ export class LayoutService {
       cloneLinkElement.setAttribute('id', id);
     });
   }
-
   changeScale(value: number) {
-    document.documentElement.style.fontSize = `${value}px`;
-  }
+  document.documentElement.style.fontSize = `${value}px`;
+  
+}
 }

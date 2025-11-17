@@ -30,10 +30,10 @@ import { CommonModule } from '@angular/common';
     ],
     imports: [
         CommonModule,
-        //BrowserModule
+        //BrowserModule,
         FormsModule,
         HttpClientModule,
-        //BrowserAnimationsModule
+        //BrowserAnimationsModule,
         InputTextModule,
         SidebarModule,
         BadgeModule,

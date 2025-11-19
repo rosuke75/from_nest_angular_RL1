@@ -7,6 +7,8 @@ import { ClienteComponent } from './components/cliente/cliente.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { CategoriaService } from './inventario/services/categoria.service';
+import { InventarioModule } from './inventario/inventario.module';
+import { TableModule} from "primeng/table";
 
 
 
@@ -20,7 +22,9 @@ import { CategoriaService } from './inventario/services/categoria.service';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    AppLayoutModule
+    AppLayoutModule,
+    TableModule,
+    InventarioModule
   ],
   providers: [
     CategoriaService

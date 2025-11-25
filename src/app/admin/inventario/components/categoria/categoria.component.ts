@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CategoriaService } from '../../services/categoria.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { title } from 'process';
 
 interface Categoria {
   detalles: any;
@@ -50,20 +51,14 @@ export class CategoriaComponent implements OnInit {
         this.visible=false;
         this.getCategorias();
         this.categoria_id=-1;
-
-
-        Swal.fire({
-          title: "good job!",
-          text: "You clicked the button!",
-          icon: "success",
-          
-        });
+        this.alerta("ACTUALIAZADO","Caterforia se modifico con exito!.","success")
 
       },
       (error:any)=>{
-        console.log(error);
+        this.alerta("ERROR AL ACTUALIZAR","Verifica los datos!","error")
       }
     )
+    this.categoriaFrom.reset();
   }
   else{
     this.categoriaService.funGuardar(this.categoriaFrom.value).subscribe(
@@ -91,7 +86,36 @@ export class CategoriaComponent implements OnInit {
     this.categoriaFrom.setValue({nombre:cat.nombre,detalle:cat.detalle})
 
   }
-  eliminirCategoria(categoria:Categoria){
+  eliminarCategoria(cat: Categoria) {
+    Swal.fire({
+      title: "¿Está seguro de eliminar la categoría?",
+      text: "Una vez eliminado no se podrá recuperar!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoriaService.funEliminar(cat.id).subscribe(
+          (res: any) =>{
+            this.alerta("ELIMINADO!","Caterforia eliminada.","success")
 
+
+            this.getCategorias();
+            this.categoria_id = -1;
+          },
+          (error: any) => {
+            this.alerta("ELIMINADO!","Caterforia eliminada.","success")
+          }
+        );
+      }
+    });
   }
+  alerta(title: string, text: string, icon: 'success' | 'error' | 'info' | 'question') {
+  Swal.fire({ title, text, icon });
+  // title: title,
+  // text: text,
+  // icon: icon
+}
 }
